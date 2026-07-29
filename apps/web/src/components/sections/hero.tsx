@@ -4,12 +4,14 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { BackgroundGlow } from "@/components/common/background-glow";
 import { AnimatedBackground } from "@/components/common/animated-background";
+import { FloatingOrbs } from "@/components/common/floating-orbs";
 export function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
        <>
   <AnimatedBackground />
   <BackgroundGlow />
+  <FloatingOrbs />
 </>
         <motion.div
   className="mx-auto max-w-3xl text-center"
@@ -52,6 +54,7 @@ export function Hero() {
           
           <Button
   size="lg"
+   variant="premium"
   className="rounded-full px-8 shadow-lg transition-transform hover:scale-105"
 >
 
@@ -64,7 +67,7 @@ export function Hero() {
   <Button
   size="lg"
   variant="outline"
-  className="rounded-full px-8 transition-transform hover:scale-105"
+  className="border-white/10 bg-white/5 backdrop-blur hover:bg-white/10"
 >
 
     View Projects
