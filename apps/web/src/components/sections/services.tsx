@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { services } from "@/data/services";
 
 export function Services() {
@@ -20,28 +23,39 @@ export function Services() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
-          {services.map((service) => {
-  const Icon = service.icon;
+          {services.map((service, index) => {
+            const Icon = service.icon;
 
-  return (
-    <div
-      key={service.title}
-      className="rounded-3xl border border-zinc-200/50 bg-white/60 p-8 backdrop-blur transition-all duration-300 hover:-translate-y-2 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900/50"
-    >
-      <div className="mb-6 inline-flex rounded-2xl bg-violet-500/10 p-4 text-violet-500">
-        <Icon size={30} />
-      </div>
+            return (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.15,
+                }}
+                whileHover={{
+                  y: -10,
+                  scale: 1.03,
+                }}
+                className="rounded-3xl border border-zinc-200/50 bg-white/60 p-8 backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/50"
+              >
+                <div className="mb-6 inline-flex rounded-2xl bg-violet-500/10 p-4 text-violet-500">
+                  <Icon size={30} />
+                </div>
 
-      <h3 className="mb-4 text-xl font-semibold">
-        {service.title}
-      </h3>
+                <h3 className="mb-4 text-xl font-semibold">
+                  {service.title}
+                </h3>
 
-      <p className="text-sm leading-7 text-zinc-600 dark:text-zinc-400">
-        {service.description}
-      </p>
-    </div>
-  );
-})}
+                <p className="text-sm leading-7 text-zinc-600 dark:text-zinc-400">
+                  {service.description}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
