@@ -1,65 +1,24 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-
-import { Providers } from "@/providers/providers";
-import { CustomCursor } from "@/components/common/custom-cursor";
-import { ScrollProgress } from "@/components/common/scroll-progress";
-import { Analytics } from "@vercel/analytics/react";
-
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: {
-    default: "ArkAelius Studio",
-    template: "%s | ArkAelius Studio",
-  },
-
+export const metadata = {
+  title: "ArkAelius Studio | Build the Future with AI",
   description:
-    "ArkAelius Studio builds AI-powered websites, SaaS products, AI solutions, and premium digital experiences for ambitious startups and modern businesses.",
-
+    "Premium AI Agency building websites, apps, SaaS and AI automation.",
   keywords: [
-    "ArkAelius Studio",
-    "AI Agency",
+    "AI",
     "Web Development",
     "Next.js",
     "React",
-    "TypeScript",
-    "UI UX",
-    "Artificial Intelligence",
-    "SaaS Development",
-    "Startup",
-    "Digital Agency",
+    "ArkAelius Studio",
+    "Software Company",
   ],
-
-  authors: [
-    {
-      name: "ArkAelius Studio",
-    },
-  ],
-
+  authors: [{ name: "ArkAelius Studio" }],
   creator: "ArkAelius Studio",
-  publisher: "ArkAelius Studio",
-
-  metadataBase: new URL("https://arkaelius.com"),
+  metadataBase: new URL("https://arkaelius-studio-web.vercel.app"),
 
   openGraph: {
     title: "ArkAelius Studio",
-    description:
-      "Build the Future with AI. We craft premium websites, AI products and digital experiences.",
-
-    url: "https://arkaelius.com",
+    description: "Build the Future with AI",
+    url: "https://arkaelius-studio-web.vercel.app",
     siteName: "ArkAelius Studio",
-
     locale: "en_US",
     type: "website",
   },
@@ -67,38 +26,6 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "ArkAelius Studio",
-    description:
-      "Build the Future with AI. Premium digital agency.",
+    description: "Build the Future with AI",
   },
-
-  robots: {
-    index: true,
-    follow: true,
-  },
-
-  category: "technology",
 };
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
-    >
-      <body className="min-h-full bg-background text-foreground">
-        <Providers>
-          
-            <ScrollProgress />
-            <CustomCursor />
-            {children}
-          <Analytics />
-        </Providers>
-      </body>
-    </html>
-  );
-}
