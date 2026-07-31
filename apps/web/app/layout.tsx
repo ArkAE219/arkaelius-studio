@@ -5,7 +5,7 @@ import "./globals.css";
 import { Providers } from "@/providers/providers";
 import { CustomCursor } from "@/components/common/custom-cursor";
 import { ScrollProgress } from "@/components/common/scroll-progress";
-
+import { Analytics } from "@vercel/analytics/react";
 
 
 const geistSans = Geist({
@@ -96,7 +96,7 @@ export default function RootLayout({
             <ScrollProgress />
             <CustomCursor />
             {children}
-          
+          <Analytics />
         </Providers>
       </body>
     </html>
