@@ -3,13 +3,17 @@
 import { motion } from "framer-motion";
 
 import { services } from "@/data/services";
+import { useRef } from "react";
+import { useGsapReveal } from "@/hooks/use-gsap-reveal";
 
-export function Services() {
+export function Services() {const sectionRef = useRef<HTMLElement>(null);
+
+useGsapReveal(sectionRef);
   return (
     <section
-      id="services"
-      className="relative py-28"
-    >
+  ref={sectionRef}
+  className="py-28"
+>
       <div className="mx-auto max-w-7xl px-6">
         {/* Heading */}
 

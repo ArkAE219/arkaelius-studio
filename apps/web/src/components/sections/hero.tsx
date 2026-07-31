@@ -5,16 +5,22 @@ import { Button } from "@/components/ui/button";
 import { BackgroundGlow } from "@/components/common/background-glow";
 import { AnimatedBackground } from "@/components/common/animated-background";
 import { FloatingOrbs } from "@/components/common/floating-orbs";
-export function Hero() {
+import { useRef } from "react";
+import { useGsapReveal } from "@/hooks/use-gsap-reveal";
+import { Magnetic } from "@/components/common/magnetic";
+export function Hero() {const heroRef = useRef<HTMLElement>(null);
+
+useGsapReveal(heroRef);
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
-       <>
-  <AnimatedBackground />
-  <BackgroundGlow />
-  <FloatingOrbs />
-</>
+  <section
+  ref={heroRef}
+  className="relative flex min-h-screen items-center justify-center overflow-hidden px-6"
+>
+       <AnimatedBackground />
+<BackgroundGlow />
+<FloatingOrbs />
         <motion.div
-  className="mx-auto max-w-3xl text-center"
+  className="relative z-10 mx-auto max-w-5xl text-center"
   initial={{ opacity: 0, y: 40 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.8 }}
@@ -50,18 +56,12 @@ export function Hero() {
   and stand out with world-class design and engineering.
 </motion.p>
 
-        <div className="mt-8 flex justify-center gap-4">
-          
-          <Button
-  size="lg"
-   variant="premium"
-  className="rounded-full px-8 shadow-lg transition-transform hover:scale-105"
->
-
-    Get Started
-
-  </Button>
-
+        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <Magnetic>
+          <Button variant="premium">
+  Get Started
+</Button>
+</Magnetic>
 
 
   <Button
@@ -78,7 +78,7 @@ export function Hero() {
   initial={{ opacity: 0 }}
   animate={{ opacity: 1 }}
   transition={{ delay: 0.6 }}
-  className="mt-16 flex flex-wrap justify-center gap-10"
+  className="mt-16 flex flex-wrap justify-center grid grid-cols-3 gap-8"
 >
   <div>
     <h3 className="text-3xl font-bold">50+</h3>

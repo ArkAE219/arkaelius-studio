@@ -14,6 +14,7 @@ import { WhyUs } from "@/components/sections/why-us";
 import { CTA } from "@/components/sections/cta";
 import { Testimonials } from "@/components/sections/testimonials";
 import { ContactCTA } from "@/components/sections/contact-cta";
+import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/layout/footer";
 
 export default function HomePage() {
@@ -45,6 +46,7 @@ export default function HomePage() {
             <CTA />
             <Testimonials />
             <ContactCTA />
+            <Contact />
             <Footer />
           </main>
         </>
