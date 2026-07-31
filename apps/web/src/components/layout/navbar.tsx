@@ -12,21 +12,26 @@ import { useScroll } from "@/hooks/use-scroll";
 export function Navbar() {
   const scrolled = useScroll(20);
   const [open, setOpen] = useState(false);
-    return (
+
+  return (
     <header
-      className={`fixed inset-x-0 top-0 z-[var(--z-header)] transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "border-b border-border/50 bg-background/80 backdrop-blur-xl"
+          ? "border-b border-white/10 bg-background/60 backdrop-blur-2xl shadow-lg shadow-black/10"
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-content items-center justify-between px-6">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         {/* Logo */}
         <Link
           href="/"
-          className="text-xl font-bold tracking-tight text-primary"
+          className="flex items-center gap-1 text-2xl font-extrabold"
         >
-          ArkAelius Studio
+          <span className="bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-400 bg-clip-text text-transparent">
+            ArkAelius
+          </span>
+
+          <span className="text-foreground">Studio</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -35,45 +40,54 @@ export function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="group relative py-2 text-sm font-medium text-muted-foreground transition-colors duration-300 hover:text-violet-400"
             >
               {item.label}
+
+              <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-violet-500 to-cyan-400 transition-transform duration-300 group-hover:scale-x-100" />
             </Link>
           ))}
         </nav>
 
-        {/* Right Side */}
+        {/* Right */}
         <div className="hidden items-center gap-3 md:flex">
           <ThemeToggle />
-          <Button>Let's Talk</Button>
+
+          <Button variant="premium">
+            Let's Talk
+          </Button>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile */}
         <button
-          className="md:hidden"
           onClick={() => setOpen(!open)}
-          aria-label="Toggle Menu"
+          className="md:hidden"
+          aria-label="Toggle menu"
         >
-          {open ? <X size={24} /> : <Menu size={24} />}
+          {open ? <X size={26} /> : <Menu size={26} />}
         </button>
       </div>
-            {open && (
-        <div className="border-t border-border bg-background md:hidden">
-          <nav className="flex flex-col p-6">
+
+      {open && (
+        <div className="border-t border-white/10 bg-background/95 backdrop-blur-xl md:hidden">
+          <nav className="flex flex-col gap-6 p-6">
             {navigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="py-3 text-muted-foreground transition-colors hover:text-foreground"
+                className="text-muted-foreground transition hover:text-violet-400"
               >
                 {item.label}
               </Link>
             ))}
 
-            <div className="mt-6 flex items-center justify-between">
+            <div className="mt-4 flex items-center justify-between">
               <ThemeToggle />
-              <Button>Let's Talk</Button>
+
+              <Button variant="premium">
+                Let's Talk
+              </Button>
             </div>
           </nav>
         </div>
