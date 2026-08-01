@@ -1,4 +1,7 @@
-export const metadata = {
+import type { Metadata } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
   title: "ArkAelius Studio | Build the Future with AI",
   description:
     "Premium AI Agency building websites, apps, SaaS and AI automation.",
@@ -29,3 +32,15 @@ export const metadata = {
     description: "Build the Future with AI",
   },
 };
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
