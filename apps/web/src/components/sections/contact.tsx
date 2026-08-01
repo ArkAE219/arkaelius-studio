@@ -1,9 +1,49 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 export function Contact() {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    setLoading(true);
+    setSuccess("");
+
+    const form = e.currentTarget;
+
+    const formData = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setSuccess("✅ Message sent successfully!");
+        form.reset();
+      } else {
+        setSuccess("❌ Failed to send message.");
+      }
+    } catch {
+      setSuccess("❌ Something went wrong.");
+    }
+
+    setLoading(false);
+  }
+
   return (
     <section id="contact" className="py-28">
       <div className="mx-auto max-w-5xl px-6">
@@ -28,28 +68,45 @@ export function Contact() {
             </p>
           </div>
 
-          <form className="mt-10 grid gap-6">
+          <form onSubmit={handleSubmit} className="mt-10 grid gap-6">
             <input
+              name="name"
               type="text"
               placeholder="Your Name"
+              required
               className="rounded-xl border border-white/10 bg-white/5 p-4 outline-none"
             />
 
             <input
+              name="email"
               type="email"
               placeholder="Your Email"
+              required
               className="rounded-xl border border-white/10 bg-white/5 p-4 outline-none"
             />
 
             <textarea
+              name="message"
               rows={6}
               placeholder="Tell us about your project..."
+              required
               className="rounded-xl border border-white/10 bg-white/5 p-4 outline-none"
             />
 
-            <Button variant="premium" className="w-full">
-              Send Message
+            <Button
+              type="submit"
+              variant="premium"
+              className="w-full"
+              disabled={loading}
+            >
+              {loading ? "Sending..." : "Send Message"}
             </Button>
+
+            {success && (
+              <p className="text-center text-sm font-medium">
+                {success}
+              </p>
+            )}
           </form>
         </motion.div>
       </div>
